@@ -1961,3 +1961,135 @@ int main()
 
     return 0;
 }
+
+
+
+//48. Constructor & Destructor Demo.
+
+#include<iostream>
+using namespace std;
+
+//class creation
+class CubeDemo
+{
+    //member variable and member function declaration
+    public:
+        int side;
+
+        //constructor declaration
+        CubeDemo()
+         {
+          side=8;
+         }
+        //destructor declaration
+        ~CubeDemo()
+         {
+          cout<<"\nDestructor called...";
+         }
+
+};
+
+//declaration of main method
+
+int main()
+{
+    //object creation
+    CubeDemo cdemoobj;
+    cout<<"";
+    cout << cdemoobj.side;
+
+}
+
+
+
+//49. Constructor overloading.
+
+#include <iostream>
+using namespace std;
+class Area
+{
+    private:
+       int length;
+       int breadth;
+
+    public:
+        // Constructor without argument
+       Area(): length(5), breadth(2)
+       {
+       }
+       // Constructor with two argument
+       Area(int l, int b): length(l), breadth(b)
+       { }
+       void GetLength()
+       {
+           cout<<"Enter length and breadth : ";
+           cin>>length>>breadth;
+       }
+       int AreaCalculation()
+        {
+           return (length*breadth);
+        }
+       void DisplayArea(int temp)
+       {
+           cout<<"Area is : "<<temp<<endl;
+       }
+};
+int main()
+{
+    Area objarea1,objarea2(24,2);
+    int temp;
+    objarea1.GetLength();
+    cout<<"Area when default constructor is called."<<endl;
+    temp=objarea1.AreaCalculation();
+    objarea1.DisplayArea(temp);
+    cout<<"Area when (parameterized constructor is called."<<endl;
+    temp=objarea2.AreaCalculation();
+    objarea2.DisplayArea(temp);
+    return 0;
+}
+
+
+
+//50. Copy Constructor.
+
+#include<iostream>
+using namespace std;
+
+class Point
+{
+private:
+    int x, y;
+public:
+    Point(int x1, int y1) 
+    { 
+        x = x1; y = y1; 
+    }
+
+    // Copy constructor
+    Point(const Point &p2)
+    {
+        x = p2.x;
+        y = p2.y;
+    }
+
+    int getX()
+    {
+         return x;
+    }
+    int getY()
+    {
+        return y;
+    }
+};
+
+int main()
+{
+    // simple constructor is called
+    Point objpoint1(53, 13);
+    // Copy constructor is called
+    Point objpoint2 = objpoint1;
+    cout << "objpoint1.x : " << objpoint1.getX() << ", objpoint1.y : " << objpoint1.getY();
+    cout << "\nobjpoint2.x : " << objpoint2.getX() << ", objpoint2.y : " << objpoint2.getY();
+
+    return 0;
+}
