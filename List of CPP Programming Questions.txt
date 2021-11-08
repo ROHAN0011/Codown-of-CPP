@@ -57,3 +57,23 @@
 29. Program to Display Even numbers in an Array.
 
 30. Program to Display Lower Triangle of a matrix.
+
+31. Program to Display upper half of matrix.
+
+32. Identity matrix.
+
+33.Program to find Inverse Matrix using Gauss jordan method.
+
+34. Matrix Addition.
+
+35. Matrix Multiplication.
+
+36. Matrix Subtraction.
+
+37. Matrix Transpose.
+
+38. Merging two Arrays.
+
+39. Remove Duplicates from Array.
+
+40. Search Array.
