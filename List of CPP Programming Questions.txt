@@ -37,3 +37,23 @@
 19. Program to Convert String to Char Array. 
 
 20. Program to Convert String to Lowercase. 
+
+21. Program to Convert String to Uppercase.
+
+22. Program to Accessing two Dimensional array element. 
+
+23. Program to Swapping Array Element. 
+
+24. Array Initialization. 
+
+25. Array of Objects. 
+
+26. Array Sort.
+
+27. Program of Array Sum and Average.
+
+28. Deletion in Array.
+
+29. Program to Display Even numbers in an Array.
+
+30. Program to Display Lower Triangle of a matrix.
