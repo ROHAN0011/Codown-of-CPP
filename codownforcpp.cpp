@@ -1544,3 +1544,420 @@ int main()
 
     return 0;
 }
+
+
+
+//41. Simple Array.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    //variable declaration
+    int size;
+
+    //take user input for array size
+    cout << "Enter how many elements you want to insert in array : ";
+    cin >> size;
+
+    int num[size];
+
+    //take user input for array elements
+    cout << "\nEnter Array elements : \n";
+
+    for (int i = 0; i < size; i++)
+    {
+        cin >> num[i];
+    }
+
+    cout << "\nElements in array : \n";
+
+    //loop to display array items
+    for (int i = 0; i < size; i++)
+    {
+        cout << num[i] << "\n";
+    }
+
+    return 0;
+}
+
+
+
+//42. Skew Symmetric Matrix.
+
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+
+using namespace std;
+
+int main()
+{
+    int arr[10][10], i, j, size;
+
+    cout << "Enter order of square matrix : ";
+    cin >> size;
+
+    cout << "\nEnter matrix values : \n";
+    for (i = 1; i <= size; i++)
+    {
+        for (j = 1; j <= size; j++)
+        {
+
+            cin >> arr[i][j];
+        }
+    }
+    for (i = 1; i <= size; i++)
+    {
+        for (j = 1; j <= size; j++)
+        {
+            if (arr[i][j] != -arr[j][i])
+            {
+                cout << "\nMatrix is not skew matrix ";
+                exit(0);
+            }
+        }
+    }
+    cout << "\nMatrix is skew matrix";
+
+    return 0;
+}
+
+
+
+//43. Smallest and Largest Number in an Array.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+
+    int size;
+    cout << "enter size of array : ";
+    cin >> size;
+
+    int arra[size];
+
+    int smallelement, largestelement;
+
+    cout << "\nenter array elements : ";
+    for (int i = 0; i < size; i++)
+    {
+        cin >> arra[i];
+    }
+    largestelement = smallelement = arra[0];
+    for (int i = 0; i < size; i++)
+    {
+        if (arra[i] > largestelement)
+        {
+            largestelement = arra[i];
+        }
+        if (arra[i] < smallelement)
+        {
+            smallelement = arra[i];
+        }
+    }
+    cout << "The biggest number is " << largestelement << endl;
+    cout << "The smallest number is " << smallelement << endl;
+
+    return 0;
+}
+
+
+
+//44. Spiral Matrix.
+
+#include <vector>
+// for auto_ptr
+#include <memory>
+// for the ceil and log10 and floor functions
+#include <cmath>
+#include <iostream>
+// for the setw function
+#include <iomanip> 
+
+using namespace std;
+
+typedef vector<int> IntRow;
+typedef vector<IntRow> IntTable;
+
+auto_ptr<IntTable> getSpiralArray(int dimension)
+{
+    auto_ptr<IntTable> spiralArrayPtr(new IntTable(
+            dimension, IntRow(dimension)));
+
+    int numConcentricSquares = static_cast< int >( ceil(
+            static_cast< double >( dimension ) / 2.0));
+
+    int j;
+    int sideLen = dimension;
+    int currNum = 0;
+
+    for (int i = 0; i < numConcentricSquares; i++)
+    {
+        // do top side
+        for (j = 0; j < sideLen; j++)
+            (*spiralArrayPtr)[i][i + j] = currNum++;
+
+        // do right side
+        for (j = 1; j < sideLen; j++)
+            (*spiralArrayPtr)[i + j][dimension - 1 - i] = currNum++;
+
+        // do bottom side
+        for (j = sideLen - 2; j > -1; j--)
+            (*spiralArrayPtr)[dimension - 1 - i][i + j] = currNum++;
+
+        // do left side
+        for (j = sideLen - 2; j > 0; j--)
+            (*spiralArrayPtr)[i + j][i] = currNum++;
+
+        sideLen -= 2;
+    }
+
+    return spiralArrayPtr;
+}
+
+void printSpiralArray(const auto_ptr<IntTable> &spiralArrayPtr)
+{
+    size_t dimension = spiralArrayPtr->size();
+
+    int fieldWidth = static_cast< int >( floor(log10(
+            static_cast< double >( dimension * dimension - 1 )))) + 2;
+
+    size_t col;
+    for (size_t row = 0; row < dimension; row++)
+    {
+        for (col = 0; col < dimension; col++)
+            cout << setw(fieldWidth) << (*spiralArrayPtr)[row][col];
+        cout << endl;
+    }
+}
+
+int main()
+{
+    printSpiralArray(getSpiralArray(5));
+
+    return 0;
+}
+
+
+
+//45. Stack using Array.
+
+#include <stdio.h>
+#include<iostream>
+
+using namespace std;
+
+//declaration of constant value
+#define MAX 5
+int top, state;
+
+// for deletion of element from stack-POP FUNCTION
+
+int pop(int stack[])
+{
+    int value;
+    if (top == -1)
+    {
+        value = 0;
+        state = 0;
+    }
+    else
+    {
+        state = 1;
+        value = stack[top];
+        --top;
+    }
+    return value;
+}
+
+
+// for insertion of element into stack -PUSH FUNCTION
+
+void push(int stack[], int item)
+{
+    if (top == (MAX - 1))
+    {
+        state = 0;
+    }
+    else
+    {
+        state = 1;
+        ++top;
+        stack[top] = item;
+    }
+}
+
+void showstack(int stack[])
+{
+    int i;
+
+    cout << "\n Stack contain: ";
+
+    if (top == -1)
+    {
+        cout << "empty";
+    }
+
+    else
+    {
+        for (i = top; i >= 0; --i)
+            cout << stack[i] << "\t";
+    }
+    cout << "\n";
+}
+
+// main method
+int main()
+{
+    int stack[MAX], item;
+    int ch;
+    top = -1;
+
+    cout << "\nSelect one choice from following Menu : ";
+    cout << "\n\n1.push item in stack";
+    cout << "\n2.pop item from stack";
+    cout << "\n3.Exit ";
+
+    do
+    {
+        do
+        {
+            cout << "\n\nEnter your choice : ";
+            cin >> ch;
+
+            if (ch < 1 || ch > 3)
+            {
+                cout << "invalid choice";
+            }
+        }
+
+        while (ch < 1 || ch > 3);
+
+        switch (ch)
+        {
+            case 1:
+                cout << "enter element you want to push :";
+                cin >> item;
+                cout << item;
+                push(stack, item);
+
+                if (state)
+                {
+                    cout << "\n after push operation";
+                    showstack(stack);
+
+                    if (top == (MAX - 1))
+                    {
+                        cout << "\n stack is full";
+                    }
+                }
+
+                else
+                    cout << "stack overflow";
+                break;
+            case 2:
+                item = pop(stack);
+                if (state)
+                {
+                    cout << "poped item is :" << item << "\n after pop operation";
+                    showstack(stack);
+                }
+
+                else
+                    cout << "stack underflow";
+                break;
+
+            default:
+                cout << "Exit... ";
+
+        }//close switch case
+    }//close do
+
+    while (ch != 3);
+
+    return 0;
+}
+
+
+
+//46. Sum of the array elements. 
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int i, Num_arr[50], sum, num;
+
+    cout << "Enter size of array : ";
+    cin >> num;
+
+    //Reading values into Array
+    cout << "\nEnter array elements : ";
+    for (i = 0; i < num; i++)
+    {
+        cin >> Num_arr[i];
+    }
+
+    //Computation of total
+    sum = 0;
+    for (i = 0; i < num; i++)
+    {
+        sum = sum + Num_arr[i];
+    }
+
+    //Printing of total
+    cout << "\nSum of array element is : " << sum;
+
+    return 0;
+}
+
+
+
+//47. Symmetric Matrix.
+
+#include<iostream>
+#include<stdlib.h>
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+    int arr[10][10], i, j, size;
+
+    cout << "Enter size of matrix : ";
+    cin >> size;
+
+
+    cout << "Enter values in matrix : \n";
+    for (i = 1; i <= size; i++)
+    {
+        for (j = 1; j <= size; j++)
+        {
+            cin >> arr[i][j];
+        }
+    }
+    for (i = 1; i <= size; i++)
+    {
+        for (j = 1; j <= size; j++)
+        {
+            if (arr[i][j] != arr[j][i])
+            {
+                cout << "\n\nMatrix is not symmetric";
+
+                exit(0);
+            }
+        }
+    }
+    cout << "\n\nMatrix is symmetric";
+
+    return 0;
+}
