@@ -964,3 +964,583 @@ void lower_halfmatrix(int mat[10][10], int row)
         cout << "\n";
     }
 }
+
+
+
+//31. Program to Display upper half of matrix.
+
+#include<iostream>
+
+using namespace std;
+
+//method declaration
+void upper_halfofmatrix(int mat[10][10], int col, int r);
+
+int main()
+{
+    //variable declaration
+    int mat[10][10], row, col, i, j;
+    //input for row and column
+    cout << "enter how many numbers of row and column you want : ";
+    cin >> row >> col;
+    //enter element into matrix
+    cout << "enter elements: \n";
+
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+    upper_halfofmatrix(mat, col, row);
+
+    return 0;
+}
+
+//method definition
+void upper_halfofmatrix(int mat[10][10], int col, int row)
+{
+    int i, j;
+
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            if (i <= j)
+                cout << mat[i][j];
+
+            else
+                cout << " ";
+        }
+
+        cout << "\n";
+    }
+}
+
+
+
+//32. Identity matrix.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int mat[5][5], order, i, j, flag = 0;
+
+    cout << "Enter size of matrix : ";
+    cin >> order;
+
+    cout << "Enter matrix element : \n";
+    for (i = 0; i < order; i++)
+    {
+        cout << "\n";
+        for (j = 0; j < order; j++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+
+    for (i = 0; i < order; i++)
+    {
+        for (j = 0; j < order; j++)
+        {
+            if (i == j)
+            {
+                if (mat[i][j] != 1)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            else
+            {
+                if (mat[i][j] != 0)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    cout << "The given matrix is ";
+    if (flag == 0)
+        cout << "an identity matrix.\n";
+    else
+        cout << "not an identity matrix.\n";
+
+    return 0;
+}
+
+
+
+//33.Program to find Inverse Matrix using Gauss jordan method.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int i, j, k, n;
+    float a[10][10] = {0}, d;
+
+    cout << "Enter the order of matrix : ";
+    cin >> n;
+    cout << "Enter the elements : " << endl;
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= n; j++)
+            cin >> a[i][j];
+
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= 2 * n; j++)
+            if (j == (i + n))
+                a[i][j] = 1;
+
+    for (i = n; i > 1; i--)
+    {
+        if (a[i - 1][1] < a[i][1])
+            for (j = 1; j <= n * 2; j++)
+            {
+                d = a[i][j];
+                a[i][j] = a[i - 1][j];
+                a[i - 1][j] = d;
+            }
+    }
+    cout << "Augmented : " << endl;
+    for (i = 1; i <= n; i++)
+    {
+        for (j = 1; j <= n * 2; j++)
+            cout << a[i][j] << "    ";
+        cout << endl;
+    }
+
+    for (i = 1; i <= n; i++)
+    {
+        for (j = 1; j <= n * 2; j++)
+            if (j != i)
+            {
+                d = a[j][i] / a[i][i];
+                for (k = 1; k <= n * 2; k++)
+                    a[j][k] -= a[i][k] * d;
+            }
+    }
+
+    for (i = 1; i <= n; i++)
+    {
+        d = a[i][i];
+        for (j = 1; j <= n * 2; j++)
+            a[i][j] = a[i][j] / d;
+    }
+
+
+    cout << "Inverse Matrix : " << endl;
+    for (i = 1; i <= n; i++)
+    {
+        for (j = n + 1; j <= n * 2; j++)
+            cout << a[i][j] << "    ";
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+
+//34. Matrix Addition.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int m, n, c, d, first[10][10], second[10][10], sum[10][10];
+
+    cout << "Enter the number of rows and columns of matrix : ";
+    cin >> m >> n;
+    cout << "Enter the elements of first matrix : \n";
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            cin >> first[c][d];
+
+    cout << "Enter the elements of second matrix : \n";
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            cin >> second[c][d];
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            sum[c][d] = first[c][d] + second[c][d];
+
+    cout << "Sum of entered matrices:-\n";
+
+    for (c = 0; c < m; c++)
+    {
+        for (d = 0; d < n; d++)
+            cout << sum[c][d] << "\t";
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+
+//35. Matrix Multiplication.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+
+    int a[5][5], b[5][5], c[5][5], m, n, p, q, i, j, k;
+
+    cout << "Enter rows and columns of first matrix: ";
+    cin >> m >> n;
+
+    cout << "Enter rows and columns of second matrix: ";
+    cin >> p >> q;
+
+    if (n == p)
+    {
+        cout << "\nEnter first matrix:\n";
+        for (i = 0; i < m; ++i)
+            for (j = 0; j < n; ++j)
+                cin >> a[i][j];
+
+        cout << "\nEnter second matrix:\n";
+        for (i = 0; i < p; ++i)
+            for (j = 0; j < q; ++j)
+                cin >> b[i][j];
+
+        cout << "\nThe new matrix is:\n";
+
+        for (i = 0; i < m; ++i)
+        {
+            for (j = 0; j < q; ++j)
+            {
+                c[i][j] = 0;
+                for (k = 0; k < n; ++k)
+                    c[i][j] = c[i][j] + (a[i][k] * b[k][j]);
+                cout << c[i][j] << "\t";
+            }
+            cout << "\n";
+        }
+    }
+    else
+        cout << "\nSorry!!!! Matrix multiplication can't be done";
+
+    return 0;
+}
+
+
+
+//36. Matrix Subtraction.
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int m, n, c, d, first[10][10], second[10][10], sub[10][10];
+
+    cout << "Enter the number of rows and columns of matrix : ";
+    cin >> m >> n;
+    cout << "Enter the elements of first matrix : \n";
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            cin >> first[c][d];
+
+    cout << "Enter the elements of second matrix : \n";
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            cin >> second[c][d];
+
+    for (c = 0; c < m; c++)
+        for (d = 0; d < n; d++)
+            sub[c][d] = first[c][d] - second[c][d];
+
+    cout << "Subtraction of entered matrices:-\n";
+
+    for (c = 0; c < m; c++)
+    {
+        for (d = 0; d < n; d++)
+            cout << sub[c][d] << "\t";
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+
+//37. Matrix Transpose.
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[10][10], trans[10][10], r, c, i, j;
+    cout << "Enter rows and columns of matrix: ";
+    cin >> r >> c;
+
+    // Storing element of matrix entered by user in array a[][].
+    cout << endl << "Enter elements of matrix: " << endl;
+    for (i = 0; i < r; ++i)
+    {
+        for (j = 0; j < c; ++j)
+        {
+            cout << "\nEnter elements a" << i + 1 << j + 1 << " : ";
+            cin >> a[i][j];
+        }
+    }
+    
+    // Displaying the matrix a[][]
+    cout << endl << "Entered Matrix: " << endl;
+    for (i = 0; i < r; ++i)
+    {
+        for (j = 0; j < c; ++j)
+        {
+            cout << " " << a[i][j];
+            if (j == c - 1)
+                cout << endl << endl;
+        }
+    }
+    // Finding transpose of matrix a[][] and storing it in array trans[][].
+    for (i = 0; i < r; ++i)
+    {
+        for (j = 0; j < c; ++j)
+        {
+            trans[j][i] = a[i][j];
+        }
+    }
+    
+    // Displaying the transpose,i.e, Displaying array trans[][].
+    cout << endl << "Transpose of Matrix: " << endl;
+    for (i = 0; i < c; ++i)
+    {
+        for (j = 0; j < r; ++j)
+        {
+            cout << " " << trans[i][j];
+            if (j == r - 1)
+                cout << endl << endl;
+        }
+    }
+    
+    return 0;
+}
+
+
+
+//38. Merging two Arrays.
+
+#include<iostream>
+
+using namespace std;
+
+
+int main()
+{
+
+    int arr1[100], arr2[100], resultarr[100], n, m, i, j, k, s;
+
+    cout << " Merging Two Arrays";
+    cout << "\n\nEnter No. of Elements in First Array : ";
+    cin >> n;
+
+    cout << "\nEnter Elements : \n";
+
+    for (i = 1; i <= n; i++)
+    {
+        cin >> arr1[i];
+    }
+
+    cout << "\nEnter No. of Elements in Second Array : ";
+    cin >> m;
+
+    cout << "\nEnter Elements in Sorted Order : \n";
+
+    for (i = 1; i <= m; i++)
+    {
+        cin >> arr2[i];
+    }
+
+    i = 1, j = 1;
+
+    for (k = 1; k <= n + m; k++)
+    {
+        // Compare Elements of Array A and Array B
+        if (arr1[i] < arr2[j])
+        {
+            resultarr[k] = arr1[i];
+            i++;
+
+            if (i > n)
+            {
+                goto b;
+            }
+
+        }
+
+        else
+        {
+            resultarr[k] = arr2[j];
+            j++;
+
+            if (j > m)
+            {
+                goto a;
+            }
+
+        }
+    }
+
+
+    a:
+    // Copy the Remaining Elements of Array A to C
+    for (s = i; s <= n; s++)
+    {
+        k++;
+        resultarr[k] = arr1[s];
+    }
+
+
+    b:
+    // Copy the Remaining Elements of Array B to C
+    for (s = j; s <= m; s++)
+    {
+        k++;
+        resultarr[k] = arr2[s];
+    }
+
+    cout << "\n\nAfter Merging Two Arrays:\n";
+
+    for (k = 1; k <= n + m; k++)
+    {
+        cout << resultarr[k] << endl;
+    }
+    return 0;
+}
+
+
+
+//39. Remove Duplicates from Array.
+
+#include<stdio.h>
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    //variable declaration
+    int a[20], i, j, k, n;
+
+    //take user input
+    cout << "Enter array size : ";
+    cin >> n;
+
+    //ask for array elements
+    cout << "\nEnter array " << n << " element : \n";
+    for (i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+
+    //display array elements
+    cout << "\nOriginal array Elements are : ";
+
+    for (i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
+
+    //display new array elements and remove duplicate numbers from array
+    cout << "\nNew array Element are  : ";
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = i + 1; j < n;)
+        {
+            if (a[j] == a[i])
+            {
+                for (k = j; k < n; k++)
+                {
+                    a[k] = a[k + 1];
+                }
+                n--;
+            }
+            else
+            {
+                j++;
+            }
+        }
+    }
+
+
+    for (i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
+
+    return 0;
+
+}
+
+
+
+//40. Search Array.
+
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    int size;
+    cout << "Enter How Many Elements You Want To Insert in Array : ";
+    cin >> size;
+    int arr[size];
+    int c, searchelement;
+    int flag = 0;
+
+    cout << "\nEnter array element : \n";
+    for (int i = 0; i < size; i++)
+    {
+        cin >> arr[i];
+    }
+
+    cout << "Enter the number to search : ";
+    cin >> searchelement;
+
+    for (c = 0; c < size; c++)
+    {
+        if (arr[c] == searchelement)
+        {
+            cout << "Element is present at location  : " << c + 1;
+            flag = 1;
+            break;
+        }
+    }
+    if (!flag)
+        cout << "Element is not present in array.\n";
+
+    return 0;
+}
