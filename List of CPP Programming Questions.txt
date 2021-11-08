@@ -97,3 +97,17 @@
 49. Constructor overloading.
 
 50. Copy Constructor.
+
+51. Example of Friend Function. 
+
+52. Function Overloading(Polymorphism).
+
+53. Function Overloading Example. 
+
+54. Hierarchical Inheritance Example.
+
+55. Hybrid Inheritance Example. 
+
+56. Merge singly linked list.
+
+57. Method Overloading Example.
