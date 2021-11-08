@@ -77,3 +77,23 @@
 39. Remove Duplicates from Array.
 
 40. Search Array.
+
+41. Simple Array.
+
+42. Skew Symmetric Matrix.
+
+43. Smallest and Largest Number in an Array.
+
+44. Spiral Matrix.
+
+45. Stack using Array.
+
+46. Sum of the array elements. 
+
+47. Symmetric Matrix.
+
+48. Constructor & Destructor Demo.
+
+49. Constructor overloading.
+
+50. Copy Constructor.
