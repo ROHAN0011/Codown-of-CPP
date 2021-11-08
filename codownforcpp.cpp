@@ -2093,3 +2093,656 @@ int main()
 
     return 0;
 }
+
+
+
+//51. Example of Friend Function. 
+
+/* C++ program to demonstrate the working of friend function.*/
+#include <iostream>
+
+using namespace std;
+
+class Distance
+{
+    private:
+        int meter;
+    public:
+        Distance(): meter(0){ }
+        //friend function
+        friend int func(Distance);
+
+};
+
+//function definition
+int func(Distance d)
+{
+    //accessing private data from non-member function
+    d.meter = 10;
+    return d.meter;
+
+}
+
+int main()
+{
+
+    Distance D;
+    //using friend function
+    cout<<"Distace: "<<func(D)<<"\n";
+    return 0;
+
+}
+
+
+
+//52. Function Overloading(Polymorphism).
+
+#include<iostream>
+
+using namespace std;
+
+class Add
+{
+    public:
+    void add(int a,int b)
+    {
+        int c;
+        c=(a+b);
+        cout<<a<<" + "<<b<<" = "<<c<<endl;
+    }
+
+    void add(float a,float b)
+    {
+        float c;
+        c=(a+b);
+        cout<<a<<" + "<<b<<" = "<<c<<endl;
+    }
+
+    void add(int a,int b,int c)
+    {
+        int d;
+        d=(a+b+c);
+        cout<<a<<" + "<<b<<" + "<<c<<" = "<<d<<endl;
+    }
+};
+
+int main()
+{
+    Add a;
+    a.add(5,6);
+    a.add(7,8,9);
+    a.add(8.0f,9.0f);
+
+    return 0;
+}
+
+
+
+//53. Function Overloading Example. 
+
+# include<iostream>
+
+using namespace std;
+
+int area(int side)
+{
+ return side*side;
+}
+
+int area(int l , int b)
+{
+ return l*b;
+}
+
+int main()
+{
+
+        int (*p1)(int);
+        int (*p2)(int,int);
+
+        p1=area;
+        p2=area;
+
+        cout<<"Address of area(int)="<<p1<<endl;
+        cout<<"Address of area(int,int)="<<p2<<endl;
+
+        cout<<"\n";
+
+        cout<<"Invoking area(int) via p1 "<<p1(20)<<endl;
+        cout<<"Invoking area(int,int) via p2 "<<p2(10,20);
+
+        return 0;
+}
+
+
+
+//54. Hierarchical Inheritance Example.
+
+#include<iostream>
+
+using namespace std;
+
+class Shape
+{
+protected:
+ float width, height;
+
+public:
+ void set_data (float a, float b)
+ {
+  width = a;
+  height = b;
+ }
+};
+
+//inheriting Shape class
+class Rectangle: public Shape
+{
+public:
+ float area ()
+ {
+  return (width * height);
+ }
+};
+
+//inheriting Shape class
+class Triangle: public Shape
+{
+    public:
+        float area ()
+        {
+            return (width * height / 2);
+        }
+};
+
+int main ()
+{
+ Rectangle rect;
+ Triangle tri;
+
+ rect.set_data (5,3);
+ tri.set_data (2,5);
+
+ cout <<"Area of Rectangle : " <<rect.area() << endl;
+ cout <<"Area of Triangle : "<< tri.area() << endl;
+
+ return 0;
+}
+
+
+
+//55. Hybrid Inheritance Example. 
+
+#include<iostream>
+
+using namespace std;
+
+class A
+{
+    public:
+        int l;
+        void len()
+        {
+           cout<<"Lenght : ";
+           cin>>l;
+        }
+};
+
+class B : public A
+{
+    public:
+        int b,c;
+       void l_into_b()
+       {
+           len();
+           cout<<"Breadth : ";
+           cin>>b;
+           c=b*l;
+       }
+};
+
+class C
+{
+    public:
+        int h;
+        void height()
+        {
+           cout<<"Height : ";
+           cin>>h;
+        }
+};
+
+//Hybrid Inheritance Level
+class D : public B , public C
+{
+    public:
+        int res;
+        void result()
+        {
+           l_into_b();
+           height();
+           res=h*c;
+
+           cout<<"\n";
+           cout<<endl<<"Result (l*b*h) : "<<res;
+        }
+};
+
+int main()
+{
+    D dObj;
+    dObj.result();
+
+    return 0;
+}
+
+
+
+//56. Merge singly linked list.
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+typedef struct linked_list
+{
+    int data;
+    struct linked_list *next;
+}
+Linked_list;
+
+//for adding node
+int add_node(Linked_list **head, int d)
+{
+    Linked_list *l = new Linked_list;
+    if(l == NULL) return 0;
+
+    Linked_list *t = *head;
+    l->data = d;
+    l->next = NULL;
+
+    if(*head == NULL)
+    {
+        *head = l;
+        return 1;
+    }
+
+    while(t->next != NULL)
+    {
+        t = t->next;
+    }
+
+    t->next = l;
+
+    return 1;
+}
+
+//print the value which are there in linked list
+void print_list(Linked_list *head)
+{
+    while(head != NULL)
+    {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+void del_list(Linked_list *head)
+{
+    while(head != NULL)
+    {
+        Linked_list *t = head ->next;
+        delete head;
+        head = t;
+    }
+}
+
+Linked_list * merge_list(Linked_list *l1, Linked_list *l2)
+{
+    Linked_list *h = l1, *r = l1, t;
+
+    if(l1 == NULL)
+    {
+        return l2;
+    }
+
+    if(l2 == NULL)
+    {
+        return l1;
+    }
+
+    if(l1->data < l2->data)
+    {
+        h = r = l1;
+        l1 = l1->next;
+    }
+    else
+    {
+        h = r = l2;
+        l2 = l2->next;
+    }
+
+    while(l1->next != NULL && l2->next != NULL)
+    {
+        if(l1->data < l2->data)
+        {
+            r->next = l1;
+            l1 = l1->next;
+            r = r->next;
+        }
+        else
+        {
+            r->next = l2;
+            l2 = l2->next;
+            r = r->next;
+        }
+    }
+
+    if(l1->next != NULL)
+    {
+        r->next = l1;
+    }
+
+    if(l2->next != NULL)
+    {
+        r->next = l2;
+    }
+
+    return h;
+}
+
+//declaration of main method
+int main(int argc, char* argv[])
+{
+    Linked_list *l1 = NULL;
+    Linked_list *l2 = NULL;
+
+    for(int i = 0; i < 10; i ++)
+    {
+        add_node(&l1, i * 3);
+    }
+
+    print_list(l1);//it will print first linked list
+
+    for(int i = 0; i < 10; i ++)
+    {
+        add_node(&l2, i * 7);
+    }
+
+    print_list(l2); //it will print 2nd linked list
+
+    Linked_list *h = merge_list(l1, l2);
+
+    print_list(h);
+
+    del_list(h);
+
+ return 0;
+}
+
+
+
+//57. Method Overloading Example.
+
+//program to show how method overloading works
+
+# include<iostream>
+
+using namespace std;
+
+//area method with one parameter
+int area(int side)
+{
+ return side*side;
+}
+
+//area method with two parameter
+int area(int l , int b)
+{
+ return l*b;
+}
+
+int main()
+{
+
+ int (*para1)(int);
+ int (*para2)(int,int);
+
+ para1=area;
+ para2=area;
+
+ cout<<"Address of area(int) : "<<(unsigned int)para1<<endl;
+ cout<<"Address of area(int,int) : "<<(unsigned int)para2<<endl;
+
+ cout<<"Invoking area(int) via para1 : "<<para1(20)<<endl;
+ cout<<"Invoking area(int,int) via para2 : "<<para2(10,20);
+}
+
+
+
+//58. Minus Operator overloading. 
+
+#include<iostream>
+
+using namespace std;
+
+class MinusOperatorOverloading
+{
+    int x,y,z;
+
+    public:
+    void get_data(int a,int b,int c)
+    {
+        x = a;
+        y = b;
+        z = c;
+    }
+
+    void operator -()
+    {
+        x = x - 10;
+        y = y - 10;
+        z = z - 10;
+    }
+
+    void display()
+    {
+        cout<<"\nx: "<<x;
+        cout<<"\ny: "<<y;
+        cout<<"\nz: "<<z;
+    }
+};
+
+int main()
+{
+    MinusOperatorOverloading oo;
+    oo.get_data(53,73,93);
+    cout<<"Before overloading:";
+    oo.display();
+
+    -oo;
+
+    cout<<"\n\n";
+    cout<<"After overloading:";
+
+    oo.display();
+
+    return 0;
+}
+
+
+
+//59. Multilevel Inheritance Example. 
+
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+class student
+{
+    private:
+      int rl;
+      char nm[20];
+
+    public:
+       void read();
+       void display();
+};
+
+class marks : public student
+{
+    protected:
+      int s1;
+      int s2;
+      int s3;
+
+    public:
+       void getmarks();
+       void putmarks();
+};
+
+class result : public marks
+{
+    private:
+      int t;
+      float p;
+      char div[10];
+
+    public:
+       void process();
+       void printresult();
+};
+
+void student::read()
+{
+    cout<<"Enter Roll no. : ";
+    cin>>rl;
+
+    cout<<"Enter Name : ";
+    cin>>nm;
+}
+
+void student:: display()
+{
+    cout <<"\nRoll no. : "<<rl<<endl;
+    cout<<"Name : "<<nm<<endl;
+
+    cout<<"\n";
+}
+
+void marks ::getmarks()
+{
+    cout<<"Enter marks for 3  subjects : "<<endl;
+    cin>>s1>>s2>>s3;
+}
+
+void marks ::putmarks()
+{
+    cout<<"Subject 1 :"<<s1<<endl;
+    cout<<"Subject 2 : "<<s2<<endl;
+    cout<<"Subject 3 : "<<s3<<endl;
+}
+
+void result::process()
+{
+    t= s1+s2+s3;
+    p = t/3.0;
+    p>=60?strcpy(div,"First"):p>=50?strcpy(div, "Second"): strcpy(div,"Third");
+}
+
+void result::printresult()
+{
+    cout<<"Total = "<<t<<endl;
+
+    cout<<"\n";
+
+    cout<<"Percentage  = "<<p<<endl;
+    cout<<"Division = "<<div<<endl;
+}
+
+int main()
+{
+    result x;
+
+    x.read();
+    x.getmarks();
+    x.process();
+    x.display();
+    x.putmarks();
+    x.printresult();
+
+    return 0;
+}
+
+
+
+//60. Multiple Inheritance Example. 
+
+#include <iostream>
+
+using namespace std;
+
+class Area
+{
+    public:
+    float area_calc(float l,float b)
+    {
+        return l*b;
+    }
+};
+
+class Perimeter
+{
+    public:
+    float peri_calc(float l,float b)
+    {
+        return 2*(l+b);
+    }
+};
+
+//Rectangle class is derived from classes Area and Perimeter.
+class Rectangle : private Area, private Perimeter
+{
+    private:
+    float length, breadth;
+
+    public:
+    Rectangle() : length(0.0), breadth(0.0) { }
+
+    void get_data( )
+    {
+        cout<<"Enter length: ";
+        cin>>length;
+
+        cout<<"Enter breadth: ";
+        cin>>breadth;
+    }
+
+    float area_calc()
+    {
+        //Calls area_calc() of class Area and returns it.
+        return Area::area_calc(length,breadth);
+    }
+
+    float peri_calc()
+    {
+        //Calls peri_calc() function of class Perimeter and returns it.
+        return Perimeter::peri_calc(length,breadth);
+    }
+};
+
+int main()
+{
+    Rectangle r;
+    r.get_data();
+
+    cout<<"\n\n";
+
+    cout<<"Area = "<<r.area_calc();
+    cout<<"\nPerimeter = "<<r.peri_calc();
+
+    return 0;
+}
