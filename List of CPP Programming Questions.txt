@@ -17,3 +17,23 @@
 9. Program to Convert Celsius  to Fahrenheit. 
 
 10. Program to Convert Centimeter to Meters and Kilometres.
+
+11. Program to Find Area and Parameter of Rectangle.
+
+12. Program to Find Radius of Circle using Area. 
+
+13. Program to Find Perfect Square. 
+
+14. Program to Find GCD and LCM. 
+
+15. Program to Find Square and Cube Root. 
+
+16. Program to Find Volume of Box. 
+
+17. Program to Find the roots of a Quadratic Equation. 
+
+18. Program to concat two Strings. 
+
+19. Program to Convert String to Char Array. 
+
+20. Program to Convert String to Lowercase. 
