@@ -111,3 +111,13 @@
 56. Merge singly linked list.
 
 57. Method Overloading Example.
+
+58. Minus Operator overloading. 
+
+59. Multilevel Inheritance Example. 
+
+60. Multiple Inheritance Example. 
+
+61. Operations using Class.
+
+62. Operator Overloading Example.
